@@ -15,11 +15,17 @@ Goals of this project:
 give people a clean base MVC structure to build a modern PHP application with
 teach people the basics of the Model-View-Controller architecture
 encourage people to code according to PSR 1/2 coding guidelines.
+
 promote the usage of PDO.
+
 promote the usage of external libraries via Composer.
+
 promote development with max. error reporting.
+
 promote to comment code.
+
 promote the usage of OOP code.
+
 using only native PHP code.
 
 SO PEOPLE DON'T HAVE TO LEARN A FRAMEWORK
