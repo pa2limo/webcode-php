@@ -16,11 +16,10 @@ give people a clean base MVC structure to build a modern PHP application with
 teach people the basics of the Model-View-Controller architecture
 encourage people to code according to PSR 1/2 coding guidelines.
 
-promote the usage of PDO.
-promote the usage of external libraries via Composer.
-promote development with max. error reporting.
-promote to comment code.
-promote the usage of OOP code.
-using only native PHP code.
-
-SO PEOPLE DON'T HAVE TO LEARN A FRAMEWORK
+1. promote the usage of PDO.
+2. promote the usage of external libraries via Composer.
+3. promote development with max. error reporting.
+4. promote to comment code.
+5. promote the usage of OOP code.
+6. using only native PHP code.
+7. SO PEOPLE DON'T HAVE TO LEARN A FRAMEWORK...
