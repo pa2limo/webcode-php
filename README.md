@@ -22,4 +22,4 @@ promote to comment code
 promote the usage of OOP code
 using only native PHP code.
 
-SO PEOPLE DON'T HAVE TO LEARN A FRAMWORK
+SO PEOPLE DON'T HAVE TO LEARN A FRAMEWORK
