@@ -20,5 +20,6 @@ promote the usage of external libraries via Composer
 promote development with max. error reporting
 promote to comment code
 promote the usage of OOP code
-using only native PHP code, 
+using only native PHP code.
+
 SO PEOPLE DON'T HAVE TO LEARN A FRAMWORK
