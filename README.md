@@ -1,7 +1,7 @@
 Webstt_PHP-MVC
 ==============
 
-Inspiring by Panique/php-mvc.
+Inspiring by Panique, http://www.dev-metal.com
 
 An extremely simple and easy to understand MVC skeleton application, reduced to the max. Everything is as simple as possible, as manually as possible and as readable as possible. This project is - by intention - NOT a full framework, it's a bare-bone structure, written in purely native PHP ! The php-mvc skeleton tries to be the extremely slimmed down opposite of big frameworks like Zend2, Symfony or Laravel.
 
