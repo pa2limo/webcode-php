@@ -16,15 +16,12 @@ class Home extends Controller
     public function index()
     {
         // load model to get raw data from soma database
-        $news_model = $this->loadModel('homeModel');
-        $news = $news_model->homenews(); 
+        $blogs_model = $this->loadModel('blogsModel');
+        $blogs = $blogs_model->getLatestpost(); 
 
-        $pen_model = $this->loadModel('home_pentingModel');
-        $pen = $pen_model->showpenting();  
+        $webtemp_model = $this->loadModel('home_pentingModel');
+        $webtemp = $webtemp_model->getLateswebtemp();();  
 
-        $ag_model = $this->loadModel('home_agendaModel');
-        $ag = $ag_model->showAgenda(); 
-        
         // load view to generate html
         require 'application/views/_templates/homeheader.php';
         require 'application/views/home/index.php';
