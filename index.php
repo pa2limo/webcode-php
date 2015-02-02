@@ -4,9 +4,9 @@
  * A simple PHP MVC skeleton - Modified By Pa2limo 
  *
  * @package php-mvc
- * @author Panique
+ * @author Pa2limo
  * @link http://www.php-mvc.net
- * @link https://github.com/panique/php-mvc/
+ * @link https://github.com/pa2limo/webcode-php/edit/master/index.php
  * @license http://opensource.org/licenses/MIT MIT License
  */
 
