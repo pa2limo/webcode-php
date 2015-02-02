@@ -1,12 +1,12 @@
 <?php
 
 /**
- * A simple PHP MVC skeleton - Modified By Pa2limo 
+ * A simple PHP MVC skeleton 
  *
  * @package php-mvc
  * @author Pa2limo
  * @link http://www.php-mvc.net
- * @link https://github.com/pa2limo/webcode-php/edit/master/index.php
+ * @link https://github.com/pa2limo/webcode-php
  * @license http://opensource.org/licenses/MIT MIT License
  */
 
