@@ -1,0 +1,1 @@
+/* handled db to view */
