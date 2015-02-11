@@ -21,9 +21,9 @@ ini_set("display_errors", 1); // show error
  *                    for production use "domain name", example "mydomainname.com"
  */
 
-define('URL', 'http://localhost/');
+define('URL', 'http://localhost/'); // root
 define('ASSET','http://localhost/public/assets/' );
-define('NEWSIMG','http://localhost/public/news_img/' );
+define('IMG','http://localhost/public/asset/img/' );
 
 /**
  * Configuration for: Database
