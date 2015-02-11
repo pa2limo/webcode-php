@@ -10,12 +10,12 @@
  * @license http://opensource.org/licenses/MIT MIT License
  */
 
-// load the (optional) Composer auto-loader
+// load the Composer auto-loader (optional)
 if (file_exists('vendor/autoload.php')) {
     require 'vendor/autoload.php';
 }
 
-// load application config (error reporting etc.)
+// load application config
 require 'application/config/config.php';
 
 // load application class
@@ -23,4 +23,4 @@ require 'application/bootapp/appurl.php';
 require 'application/bootapp/controller.php';
 require 'application/addlibs/mylib.php';
 // start the application
-$app = new Appurl();
+$app = new Appurl(); // strat app engine
