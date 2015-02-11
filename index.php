@@ -4,8 +4,8 @@
  * A simple PHP MVC skeleton 
  *
  * @package php-mvc
- * @author Pa2limo
- * @link http://www.php-mvc.net
+ * @author pa2limo
+ * @link http://www.webcode.or.id
  * @link https://github.com/pa2limo/webcode-php
  * @license http://opensource.org/licenses/MIT MIT License
  */
@@ -19,8 +19,8 @@ if (file_exists('vendor/autoload.php')) {
 require 'application/config/config.php';
 
 // load application class
-require 'application/libs/application.php';
-require 'application/libs/controller.php';
-require 'application/libs/mylib.php';
+require 'application/boot/appurl.php';
+require 'application/boot/controller.php';
+require 'application/addlibs/mylib.php';
 // start the application
-$app = new Application();
+$app = new Appurl();
