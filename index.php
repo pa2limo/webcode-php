@@ -23,4 +23,4 @@ require 'application/bootapp/appurl.php';
 require 'application/bootapp/controller.php';
 require 'application/addlibs/mylib.php';
 // start the application
-$app = new Appurl(); // strat app engine
+$app = new Appurl(); // start app engines (igniter)
