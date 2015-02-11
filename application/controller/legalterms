@@ -1,1 +1,26 @@
-/* legalterms.php */
+<?php
+
+/**
+ * Class Legalterms
+ *
+ * Please note:
+ * Don't use the same name for class and method, as this might trigger an (unintended) __construct of the class.
+ * This is really weird behaviour, but documented here: http://php.net/manual/en/language.oop5.decon.php
+ *
+ */
+class Legalterms extends Controller
+{
+    /**
+     * PAGE: index
+     * This method handles what happens when you move to http://yourproject/blogs/index
+     */
+    public function index()
+    {
+        // $lt_model = $this->loadModel('LtModel');
+        // $lt = $lt_model->getLt(); 
+
+        require 'application/views/_templates/blogheader.php';
+        require 'application/views/legalterms/index.php';
+        require 'application/views/_templates/footer.php';
+    }   
+}
