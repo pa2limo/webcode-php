@@ -13,8 +13,8 @@ class Controller {
     public $db = null; // null db connection
 
     /**
-     * Whenever a controller is created, open a database connection too via class model name. 
-     * The idea behind is to have ONE connection that can be used by multiple models.
+     * Whenever a controller is created, automaticly open a database connection via class model name. 
+     * ONE connection that can be used by multiple models.
      */
 
     function __construct()  {
@@ -22,25 +22,43 @@ class Controller {
     }
 
     /**
-     *  Open the database connection with the credentials from application/config/config.php
-     *  See : pre-defined data contents in config.php
-     *  
+     *  Open the database connection with the credentials from application/config.php
+     *  See : pre-defined data contents in application/config.php
      */
 
     private function openDatabaseConnection() {
-        //
         $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ, 
                          PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING);
-        //                   
         $this->db = new  PDO(DB_TYPE.':host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS, $options);
-        // Use by Model, example : this->db = $db
+        
+    /**  EXAMPLE Use by Model File : application/models/blogsmodel.php  (examples)
+      *  Class BlogsModel {
+      *     function __construct($db) {
+      *        try {
+      *            $this->db = $db;
+      *        } catch (PDOException $e) {
+      *        exit('Database connection could not be established.');
+      *        }
+      *     }
+      *     
+      *     public function getAllblogs()  {
+      *        $sql = 'SELECT .........  blog_type = "post" ORDER BY blog_id DESC';  
+      *        $query = $this->db->prepare($sql);
+      *        $query->execute();
+      *        return $query->fetchAll();
+      *     }
+      *     ..... and another methods...
+      *     .........
+      *     ........
+      *  }
+      *  END EXAMPLE   */
     }
 
     /**
      * Load the model with the given name.
-     * loadModel("blogsModel") would include application/models/blogsmodels.php and create the object in the blogs controller class, 
+     * loadModel("blogsModel") would include application/models/blogsmodel.php and create the object in the blogs controller class, 
      * 
-     * Examples like this: 
+     * Examples : File application/controller/blogs.php
      * Class Blogs extend Controller {
      *      public function index() {
      *      $blogs_model = $this->loadModel('BlogsModel');
