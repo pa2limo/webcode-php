@@ -16,11 +16,11 @@ if (file_exists('vendor/autoload.php')) {
 }
 
 // load application config
-require 'application/config/config.php';
+require 'application/config.php';
 
 // load application class
-require 'application/bootapp/appurl.php';
-require 'application/bootapp/controller.php';
-require 'application/addlibs/mylib.php';
+require 'application/appurl.php';
+require 'application/controller.php';
+require 'application/mylib.php';
 // start the application
 $app = new Appurl(); // start app engines (igniter)
