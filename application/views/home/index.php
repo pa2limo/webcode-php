@@ -1,9 +1,3 @@
-/* This home/index.php 
- * 
- * strat application here
- * purpose to view main menu
- * 
- */
 <body>
 <div id="wrapper">
 	<!-- start header -->
@@ -17,16 +11,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo URL; ?>home/index.php"><span>Web</span>Code</a>
+                    <a class="navbar-brand" href="<?php echo URL; ?>home/"><span>Web</span>Code</a>
                 </div>
 
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo URL; ?>/home/index.php"><h4>Home</h4></a></li>
-                        <li><a href="<?php echo URL; ?>/blogs/index.php" target="_blank"><h4>Blogs</h4></a></li>
-                        <li><a href="<?php echo URL; ?>/snippets/index.php" target="_blank"><h4>Snippet</h4></a></li>
-                        <li><a href="<?php echo URL; ?>/tutors/index.php" target="_blank"><h4>Tutorial</h4></a></li>
-                        <li><a href="<?php echo URL; ?>/webtemplates/index.php" target="_blank"><h4>Template</h4></a></li>
+                        <li class="active"><a href="<?php echo URL; ?>home/"><h4>Home</h4></a></li>
+                        <li><a href="<?php echo URL; ?>blogs/" target="_blank"><h4>Blogs</h4></a></li>
+                        <li><a href="<?php echo URL; ?>snippets/" target="_blank"><h4>Snippet</h4></a></li>
+                        <li><a href="<?php echo URL; ?>tutorials/" target="_blank"><h4>Tutorial</h4></a></li>
+                        <li><a href="<?php echo URL; ?>webtemplates/" target="_blank"><h4>Template</h4></a></li>
                     </ul>
                 </div>
 
@@ -41,66 +35,30 @@
 				<div class="col-lg-12"> 
 	        		<div id="main-slider" class="flexslider"><!-- Slider -->	
 	            		<ul class="slides">
+	            		<?php
+	            		// TEST : http://www.webpagetest.org/result/150309_G8_R66/
+	            		$nom=1;
+	            		foreach ($sliders as $slide) { 
+	            		  //if (isset ($slide->slide_img)) 
+	            		  $urlimg = ASSET.'img/slides/'.$nom.'.jpg'; ?>	
 			              <li>
-			                <img src="<?php echo ASSET; ?>img/slides/6.jpg" alt="" />
+			                <img src="<?php echo ($urlimg) ; ?>" alt=""/>
 			                <div class="flex-caption">
-			                		<ul class="company-social">
-					  <li class="social-facebook"><a href="https://www.facebook.com/webcode.nusantara.group" target="_blank"><i class="fa fa-facebook"></i></a></li>
-					  <li class="social-twitter"><a href="https://twitter.com/web_cod" target="_blank"><i class="fa fa-twitter"></i></a></li>
-					  <li class="social-github"><a href="https://github.com/pa2limo/webcode-php" target="_blank"><i class="fa fa-github"></i></a></li>
-					  <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-	            	</ul>
-			                    <h3>Tutorial Center</h3> 
-								<p>Rich learning resources to boost your skill, build PHP based webapp quickly. </p> 
-								<a href="<?php echo URL; ?>tutorials/index.php" class="btn btn-theme">Learn More</a>
+			                	<ul class="company-social">
+									<li class="social-facebook"><a href="https://www.facebook.com/webcode.nusantara.group" target="_blank"><i class="fa fa-facebook"></i></a></li>
+									<li class="social-twitter"><a href="https://twitter.com/web_cod" target="_blank"><i class="fa fa-twitter"></i></a></li>
+									<li class="social-github"><a href="https://github.com/pa2limo/webcode-php" target="_blank"><i class="fa fa-github"></i></a></li>
+									<li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+					            </ul>
+			                    <h3><?php if (isset ($slide->slide_title)) echo ($slide->slide_title) ;?></h3> 
+								<p><?php if (isset ($slide->slide_content)) echo ($slide->slide_content) ;?></p> 
+								<?php if (isset ($slide->slide_url)) $urls = URL. $slide->slide_url ;?>
+								<a href="<?php echo $urls ;?>" class="btn btn-theme">Learn More</a>
 			                </div>
-			              </li>
-			              <li>
-			                <img src="<?php echo ASSET; ?>img/slides/10ss.jpg" alt="" />
-			                <div class="flex-caption">
-			                    <ul class="company-social">
-				<li class="social-facebook"><a href="https://www.facebook.com/webcode.nusantara.group" target="_blank"><i class="fa fa-facebook"></i></a></li>
-				<li class="social-twitter"><a href="https://twitter.com/web_cod" target="_blank"><i class="fa fa-twitter"></i></a></li>
-				<li class="social-github"><a href="https://github.com/pa2limo/webcode-php" target="_blank"><i class="fa fa-github"></i></a></li>
-				<li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-					            	</ul>
-			                    <h3>Webtech Blog</h3> 
-								<p>Tips and Tricks from Web Master around the world. PHP within lib packages the simplest way.</p> 
-								<a href="<?php echo URL; ?>blogs/index.php" class="btn btn-theme">Learn More</a>
-			                </div>
-			              </li>
-			              <li>
-			                <img src="<?php echo ASSET; ?>img/slides/123.jpg" alt="" />
-			                <div class="flex-caption">
-			                    
-			                    <ul class="company-social">
-			        <li class="social-facebook"><a href="https://www.facebook.com/webcode.nusantara.group" target="_blank"><i class="fa fa-facebook"></i></a></li>
-				<li class="social-twitter"><a href="https://twitter.com/web_cod" target="_blank"><i class="fa fa-twitter"></i></a></li>
-				<li class="social-github"><a href="https://github.com/pa2limo/webcode-php" target="_blank"><i class="fa fa-github"></i></a></li>
-				<li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-						            </ul> 		                	
-									<h3>Web Template</h3>
-								    <p>Provide more webpage template make you should only focus on logic scheme coding.</p>
-								    <a href="<?php echo URL; ?>webtemplates/index.php" class="btn btn-theme">Learn More</a> 
-					           </div>
-			              </li>
-
-			            <li>
-			                <img src="<?php echo ASSET; ?>img/slides/18.jpg" alt="" />
-			                <div class="flex-caption">
-			                    
-			                    <ul class="company-social">
-				<li class="social-facebook"><a href="https://www.facebook.com/webcode.nusantara.group" target="_blank"><i class="fa fa-facebook"></i></a></li>
-				<li class="social-twitter"><a href="https://twitter.com/web_cod" target="_blank"><i class="fa fa-twitter"></i></a></li>
-				<li class="social-github"><a href="https://github.com/pa2limo/webcode-php" target="_blank"><i class="fa fa-github"></i></a></li>
-				<li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
-						        </ul> 		                	
-								<h3>Code Snippets</h3>
-								<p>Usefull PHP snippets with more tips and tricks powered by MVC skeleton.</p>
-								<a href="<?php echo URL; ?>snippets/index.php" class="btn btn-theme">Learn More</a> 
-					        </div>
-			            </li>
-	            		</ul>
+			              </li><?php
+			              ++$nom;  
+			            } ?>
+		            	</ul> <!-- end ul class slider -->
 	        		</div> <!-- end slider -->
 				</div>
 				<h2 class="text-shadow aligncenter">FREE WEB-TECHNOLOGY LEARNING RESOURCES</h2>
@@ -109,7 +67,7 @@
 </section>
 
 <div class="solidline"></div>
-<h3 class="text-shadow aligncenter">LATEST POST</h3>
+<h3 class="text-shadow aligncenter">LATEST POST <?php // echo memory_get_usage() . "\n";?></h3>
 <section id="content">
 	<div class="container">
 		<!-- SEGMEN-3.1 -->
@@ -131,17 +89,15 @@
 							$jud = get_words ($homes->blog_title, 3 ) ;
 							echo "<h5>", ($jud),"</h5>";
 						} 
-						if (isset($homes->blog_date)) 
-						{
-						   	$tgl=tanggal_id($homes->blog_date); 	   		 
-				  		}		   		 
+						if (isset($homes->blog_date)) $dates=date_create($homes->blog_date);
+										  				   		 
 			            if (isset($homes->blog_content)) 
 			            {
 			             	$t=$homes->blog_content;
 			            	$tampil= get_words($t, 20);
 			            	echo "<p><h6>", ($tampil),"</h6></p>";
 			            } ?>		           
-			            <p><span class="label label-primary"><?php echo ($tgl);?></span> 
+			            <p><span class="label label-primary"><?php echo "   ", (date_format($dates,'d M Y'));?></span> 
 			            <span class="label label-warning"><a href="<?php echo URL.'/blogs/show/'.$id.'/'.$slug ; ?>">Read More...</a></span></p>
 
 			        </div><!-- /caption -->
@@ -154,6 +110,7 @@
 		<div class="solidline"></div>
 		
 		<div class="col-lg-12">
+			<?php // echo memory_get_usage() . "\n";?>
 				<div id="pagination">
 			    	<div class="row setup-content" id="step-1">
 			            <h2 class="text-shadow aligncenter"><p class="biruku">The Perfect Storm: Internet Boom of the Early 1990s</p></h2>
@@ -218,7 +175,7 @@
 						Afterwards, public testing of PHP 3 began, and the official launch came in June 1998. Suraski and Gutmans then started a new rewrite of PHP's core, producing the Zend Engine in 1999.
 						They also founded Zend Technologies in Ramat Gan, Israel.
 						In 2008 PHP 5 became the only stable version under development. Late static binding had been missing from PHP and was added in version 5.3, included new features such as improved support for object-oriented programming.
-						Stable Version with security fixed are availiable at official PHP website <strong>php.net, recommended to use</strong> Version : 5.4.34, 5.5.18 and latest stable 5.6.2.
+						Stable Version with security fixed are availiable at official PHP website <strong>php.net, recommended to use Latest</strong> Version : 5.4.37, 5.5.21 and latest stable 5.6.5, released 22 January 2015.
              		</div>
 
 			    	<div class="row setup-content" id="step-5"> 
@@ -251,13 +208,13 @@
 			    	</div>
 
 			    	<ul class="pagination pagination-sm setup-panel">					  
-						  <li class="active"><a href="#step-1">1</a></li>
-						  <li class="disable"><a href="#step-2">2</a></li>
-						  <li class="disable"><a href="#step-3">3</a></li>
-						  <li class="disable"><a href="#step-4">4</a></li>
-						  <li class="disable"><a href="#step-5">5</a></li>
-						  <li class="disable"><a href="#step-6">6</a></li>
-						  <li class="disable"><a href="#step-1">WEB HISTORY NOTES</a></li>
+						<li class="active"><a href="#step-1">1</a></li>
+						<li class="disable"><a href="#step-2">2</a></li>
+						<li class="disable"><a href="#step-3">3</a></li>
+						<li class="disable"><a href="#step-4">4</a></li>
+						<li class="disable"><a href="#step-5">5</a></li>
+						<li class="disable"><a href="#step-6">6</a></li>
+						<li class="disable"><a href="#step-1">WEB HISTORY NOTES</a></li>
 					</ul>
 					
 				</div><!-- /paginator -->
@@ -269,24 +226,21 @@
 	<div class="container"><!-- SEGMEN-4 Portfolio Projects -->
 		<div class="row">
 			<div class="col-lg-12">
-				<h2 class="text-shadow aligncenter">Free PHP-MySQL Website with Bootstrap</h2>
+				<h2 class="text-shadow aligncenter">Free PHP Real Website with Bootstrap</h2>
 				<div class="col-lg-3 aligncenter">
-					<a href="#"><img src="<?php echo ASSET; ?>img/works/webcode.jpg" alt="" />
-					<strong>Webcode Site</strong></a>
+					<a href="https://github.com/pa2limo/webcode-php" target="_blank"><h6 class="text-shadow aligncenter">WEBCODE Lite</h6><img src="<?php echo ASSET; ?>img/works/webcode1.jpg" alt="" />
+					</a>
 				</div>
 				<div class="col-lg-3 aligncenter">
-					<a href="#"><img src="<?php echo ASSET; ?>img/works/webcode2.jpg" alt="" />
-					<strong>Pomosda Site</strong></a>
+					<a href="http://pomosda.or.id" target="_blank"><h6 class="text-shadow aligncenter">POMOSDA</h6><img src="<?php echo ASSET; ?>img/works/webcode2.jpg" alt="" /></a>
 				</div>
 				<div class="col-lg-3 aligncenter">
-					<a href="#"><img src="<?php echo ASSET; ?>img/works/3.jpg" alt="" />
-					<strong>Web-3 Site</strong></a>
+					<a href="https://github.com/pa2limo/STTP-Lite-MVC-Pattern" target="_blank"><h6 class="text-shadow aligncenter">STTP Lite</h6><img src="<?php echo ASSET; ?>img/works/webcode3.jpg" alt="" /></a>
 				</div>
 				<div class="col-lg-3 aligncenter">
-					<a href="#"><img src="<?php echo ASSET; ?>img/works/4.jpg" alt="" />
-					<strong>Web-4 Site</strong></a>
+					<a href="#"><h6 class="text-shadow aligncenter">TALIATI</h6><img src="<?php echo ASSET; ?>img/works/webcode4.jpg" alt="" /></a>
 				</div>
-			</div>	<!-- /col-lg-12 -->		
+			</div>	<!-- /col-lg-12 -->				
 		</div>	<!-- /row -->
 	</div> <!-- /container -->				
 		
