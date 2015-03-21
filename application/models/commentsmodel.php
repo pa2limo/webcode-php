@@ -12,7 +12,6 @@ class CommentsModel {
             exit('Database connection could not be established.');
         }
     }
-
     /**
      * Get blog comments from database load by blog_id
      * @param string $id as blog_id 
@@ -44,7 +43,7 @@ class CommentsModel {
         // clean the input from javascript code for example
         $com_name = strip_tags($com_name);
         $com_email = strip_tags($com_email);
-        $com_content = strip_tags($com_content);
+        $com_content = strip_tags($com_content, '<p>'); // strip_tags ($text, 'Allowable HTML tags');
         $com_id = strip_tags($com_id);
         $created_at = date("Y-m-d h:i:s");
 
@@ -64,6 +63,7 @@ class CommentsModel {
                               ':com_content' => $com_content, 
                               ':com_id' => $com_id,
                               ':created_at' => $created_at));
+
      }
    
     /**
@@ -122,7 +122,9 @@ class CommentsModel {
                               ':com_content' => $com_content, 
                               ':com_id' => $com_id,
                               ':created_at' => $created_at));
+
     }
+   
     
     public function deleteTutcom($id) {
         
