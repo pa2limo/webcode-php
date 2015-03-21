@@ -19,8 +19,8 @@ class Legalterms extends Controller
         // $lt_model = $this->loadModel('LtModel');
         // $lt = $lt_model->getLt(); 
 
-        require 'application/views/_templates/blogheader.php';
+        require 'application/views/_templates/header2.php';
         require 'application/views/legalterms/index.php';
-        require 'application/views/_templates/footer.php';
+        require 'application/views/_templates/footer2.php';
     }   
 }
