@@ -15,12 +15,15 @@ class Home extends Controller {
      */
     public function index()
     {
-        // debug message to show where you are, just for the demo
-        $blogs_model = $this->loadModel('BlogsModel');
-        $blogs = $blogs_model->getLatest();
+        // create object, activate BlogsModel and established db connection 
+        $sliders_model = $this->loadModel('SlidersModel');
+        $sliders = $sliders_model->getSliders();
+         
+        $blogs_model = $this->loadModel('BlogsModel'); 
+        $blogs = $blogs_model->getLatest(); 
         // load views. within the views we can echo out $songs and $amount_of_songs easily
-        require 'application/views/_templates/header.php';
+        require 'application/views/_templates/header1.php';
         require 'application/views/home/index.php';
-        require 'application/views/_templates/footer.php';
+        require 'application/views/_templates/footer1.php';
     }
 }
