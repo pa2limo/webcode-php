@@ -39,29 +39,6 @@ class Blogs extends Controller {
      */
     public function show($id, $slug) {
     
-        if (isset($_GET["id"])) $id=$_GET["id"]; 
-        if (isset($_GET["slug"]))  $slug=$_GET["slug"]; 
-
-        $blogs_model = $this->loadModel('BlogsModel');
-        $blogs = $blogs_model->show($id, $slug);
-              
-        $comments_model = $this->loadModel('CommentsModel');
-        $comments = $comments_model->getBlogcom($id, $slug);
-
-        $category_model = $this->loadModel('CategorysModel'); 
-        $category = $category_model->getCategory(); 
-
-        $tags_model = $this->loadModel('TagsModel'); 
-        $tags = $tags_model->getAlltag();
-
-        require 'application/views/_templates/blogshowheader.php';
-        require 'application/views/blogs/show.php';
-        require 'application/views/_templates/blogshowfooter.php'; 
-    }
-
-
-   public function show($id, $slug) {
-    
         $blogs_model = $this->loadModel('BlogsModel');
         $blogs = $blogs_model->show($id, $slug);
               
@@ -79,7 +56,8 @@ class Blogs extends Controller {
         require 'application/views/_templates/footer3.php'; 
     }
 
-   public function show_Cat($cid, $cname)  {
+
+    public function show_Cat($cid, $cname)  {
 
         $blogs_model = $this->loadModel('BlogsModel');
         $blogs = $blogs_model->getCatblogs($cid, $cname);
@@ -131,3 +109,4 @@ class Blogs extends Controller {
         }
     }
 }
+
