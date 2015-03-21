@@ -15,50 +15,29 @@ class BlogsModel {
             exit('Database connection could not be established.');
         }
     }
- 
-    public function getAllblogs()  {
-    //  ===== Show All Blog Post ============================================= // 
-        $sql = "SELECT blog_id, 
-                       blog_title, 
-                       blog_content, 
-                       blog_img, 
-                       user_name, 
-                       blog_date,
-                       cat_id,
-                       blog_type, 
-                       comment_count,
-                       blog_read,
-                       blog_like
-                       FROM blog WHERE blog_type = 'post' ORDER BY blog_id DESC";                     
-                       // Filter only where blog_type = 'post', to avoid 'draft' 
-        $query = $this->db->prepare($sql); // Standard Class PDO::prepare ()
-        $query->execute(); // Standard PDOStatement::execute
-
-        return $query->fetchAll(); // Standard PDOStatement::fetchAll — Returns an array containing all of the result set rows
-                               
-    }
-
+    
     public function getLatest() {
     //  ===== Show 4 Latest Blog Post ============================================= // 
-        $sql = 'SELECT blog_id, 
-                       blog_title, 
-                       blog_content, 
-                       blog_img, 
-                       user_name, 
-                       blog_date,
-                       cat_id,
-                       blog_type, 
-                       comment_count,
-                       blog_mime_type,
-                       blog_read,
-                       blog_like
-                       FROM blog WHERE blog_type = "post" ORDER BY blog_id DESC LIMIT 4';              
-                       // Filter only where blog_type = 'post', to avoid 'draft' 
+    // TBLOG came from config.php : define table column select
+        $sql = 'SELECT '.TBLOG.' blog_type = "post" ORDER BY blog_id DESC LIMIT 4';  
+        // Filter only where blog_type = 'post', to avoid 'draft' 
         $query = $this->db->prepare($sql);
         $query->execute();
 
         return $query->fetchAll();
     }
+
+    public function getAllblogs()  {
+    //  ===== Show All Blog Post ============================================= // 
+
+        $sql = 'SELECT '.TBLOG.' blog_type = "post" ORDER BY blog_id DESC';  
+        // Filter only where blog_type = 'post', to avoid 'draft' 
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll(); // Standard PDOStatement::fetchAll — Returns an array containing all of the result set rows                                 // PDOStatement::rowCount    
+    }
+
     /**
      *  Show a Blog from database
      */
@@ -69,64 +48,59 @@ class BlogsModel {
         $sth->execute(array(':id' => $id));    
 
     // ===== Show One Blog Post By Blog_id============================================= //            
-        $sql = 'SELECT blog_id, 
-                       blog_title, 
-                       blog_content, 
-                       blog_img, 
-                       user_name, 
-                       blog_date,
-                       cat_id,
-                       comment_count,
-                       blog_like,
-                       blog_read FROM blog WHERE blog_id = :id';
-
+        $sql = 'SELECT '.TBLOG.' blog_id = :id'; 
         $query = $this->db->prepare($sql);
         $query->execute(array(':id' => $id));
 
         return $query->fetch();
-
     } 
   
     public function getCatblogs($cid, $cname) { 
     //  ===== Show All Blog Post Filter By Cat_id ====================== //        
-        $sql = 'SELECT blog_id, 
-                       blog_title, 
-                       blog_content, 
-                       blog_img, 
-                       user_name, 
-                       blog_date,
-                       cat_id,
-                       blog_type, 
-                       comment_count,
-                       blog_like
-                       FROM blog WHERE cat_id = :cid ORDER BY blog_id DESC';
-
+        $sql = 'SELECT '.TBLOG.' cat_id = :cid ORDER BY blog_id DESC';
         $query = $this->db->prepare($sql);
         $query->execute(array(':cid' => $cid));
 
         return $query->fetchAll();
     } 
 
+    public function addBlog($blog_title, $blog_content, $blog_img, $user_name, $cat_id, $tag_id, $blog_mime_type)  {
+        // clean the input from javascript code for example
+        $blog_title = strip_tags($blog_title);
+        $blog_content = strip_tags($blog_content);
+        $blog_img = strip_tags ($blog_img); // strip_tags ($text, 'Allowable HTML tags');
+        $user_name = strip_tags($user_name);
+        $cat_id = strip_tags($cat_id);
+        $tag_id = strip_tags($tag_id);
+        $blog_mime_type = strip_tags($blog_mime_type);
+        $blog_date = date("Y-m-d h:i:s");
 
-    public function getTagblogs($tid, $tname) { 
-    //  ===== Show All Blog Post By tat_id =============================== //        
-        $sql = 'SELECT blog_id, 
-                       blog_title, 
-                       blog_content, 
-                       blog_img, 
-                       user_name, 
-                       blog_date,
-                       cat_id,
-                       blog_type, 
-                       comment_count,
-                       blog_like
-                       FROM blog WHERE tag_id = :tid ORDER BY blog_id DESC';
-
+         $sql = 'INSERT INTO blog ( blog_title,
+                                    blog_content,
+                                    blog_img,
+                                    user_name,
+                                    blog_date,
+                                    cat_id,
+                                    tag_id,
+                                    blog_mime_type) VALUES (:blog_title,
+                                                            :blog_content,
+                                                            :blog_img,
+                                                            :user_name,
+                                                            :blog_date,
+                                                            :cat_id,
+                                                            :tag_id,
+                                                            :blog_mime_type)'; 
+        // queries
         $query = $this->db->prepare($sql);
-        $query->execute(array(':tid' => $tid));
-
-        return $query->fetchAll();
-    } 
+        $query->execute(array(':blog_title' => $blog_title,
+                              ':blog_content' => $blog_content,
+                              ':blog_img' => $blog_img, 
+                              ':user_name' => $user_name,
+                              ':blog_date' => $blog_date,
+                              ':cat_id' => $cat_id,
+                              ':tag_id' => $tag_id,
+                              ':blog_mime_type' => $blog_mime_type));
+     }
 
     public function deleteBlog($id) {
         // ===== Delete Post By id =================== //
@@ -141,18 +115,26 @@ class BlogsModel {
         $query = $this->db->prepare($sql);
         $query->execute(array(':conts' => $conts, ':id' => $id));
 
-        return $query->fetch();
-               
+        return $query->fetch();             
+    }
+
+    public function draftBlog($id) {
+        // ===== Change Blog Post to Draft  ========================== //
+        $sql = 'UPDATE blog SET blog_type = "draft" WHERE blog_id = :id';
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':id' => $id));
+
+        return $query->fetch();             
     }
 
     public function addCounts($id, $comm_count) {
         // ===== Set Blog Comment Counts ======= //
-        $comm_count = strip_tags($comm_count);
+       
         $sql = 'UPDATE blog SET comment_count = :comm_count WHERE blog_id = :id';
         $query = $this->db->prepare($sql);
         $query->execute(array(':comm_count' => $comm_count, ':id' => $id));
 
         return $query->fetch();
-    }
-    
-}    
+    }  
+     
+} // end class BlogsModel  
