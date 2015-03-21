@@ -70,19 +70,23 @@ CREATE TABLE IF NOT EXISTS `category` (
   `blog_count` smallint(4) unsigned NOT NULL,
   `snip_count` smallint(4) unsigned NOT NULL,
   `tut_count` smallint(4) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`cat_id`, `cat_name`, `blog_count`, `snip_count`, `tut_count`) VALUES
-(1, 'PHP-5', 4, 0, 0),
-(2, 'PHP-Framework', 0, 0, 0),
-(3, 'Web-Tecnology', 2, 0, 0),
-(4, 'Front-End Crafts', 0, 0, 0),
-(5, 'Computer Know How', 0, 0, 0),
-(6, 'Algorithm with Cpp', 0, 0, 0);
+(1, 'PHP-Basic', 3, 0, 0),
+(2, 'PHP-OOP', 3, 0, 0),
+(3, 'PHP-Framework', 0, 0, 0),
+(4, 'PHP-Security', 0, 0, 0),
+(5, 'Best-Practices', 1, 0, 0),
+(6, 'Scaling-Webapp', 0, 0, 0),
+(7, 'Web-Server', 0, 0, 0),
+(8, 'Bootstrap', 0, 0, 0),
+(9, 'HTML-CSS', 0, 0, 0),
+(10, 'JQuery', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -96,54 +100,21 @@ CREATE TABLE IF NOT EXISTS `category_post` (
   `blog_id` int(10) unsigned NOT NULL,
   `snip_id` int(10) NOT NULL,
   `tut_id` int(10) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `category_post`
 --
 
 INSERT INTO `category_post` (`id`, `cat_id`, `blog_id`, `snip_id`, `tut_id`) VALUES
-(1, 2, 1, 0, 0),
-(2, 2, 2, 0, 0),
-(3, 2, 3, 0, 0),
-(4, 3, 3, 0, 0);
+(1, 1, 1, 0, 0),
+(2, 5, 2, 0, 0),
+(3, 1, 3, 0, 0),
+(4, 2, 4, 0, 0),
+(5, 1, 5, 0, 0),
+(6, 2, 6, 0, 0),
+(7, 2, 7, 0, 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `category_tag`
---
-
-CREATE TABLE IF NOT EXISTS `category_tag` (
-`id` tinyint(3) unsigned NOT NULL,
-  `cat_id` tinyint(3) unsigned NOT NULL,
-  `tag_id` tinyint(4) unsigned NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
-
---
--- Dumping data for table `category_tag`
---
-
-INSERT INTO `category_tag` (`id`, `cat_id`, `tag_id`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 2, 4),
-(5, 2, 5),
-(6, 3, 6),
-(7, 3, 7),
-(8, 3, 8),
-(9, 3, 9),
-(10, 3, 10),
-(11, 3, 11),
-(12, 4, 12),
-(13, 4, 13),
-(14, 4, 14),
-(15, 5, 15),
-(16, 5, 16),
-(17, 5, 17),
-(18, 5, 18),
-(19, 5, 19);
 
 -- --------------------------------------------------------
 
@@ -214,44 +185,6 @@ CREATE TABLE IF NOT EXISTS `page` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `tag`
---
-
-CREATE TABLE IF NOT EXISTS `tag` (
-`tag_id` tinyint(4) unsigned NOT NULL,
-  `tag_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `blog_count` smallint(4) unsigned DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
-
---
--- Dumping data for table `tag`
---
-
-INSERT INTO `tag` (`tag_id`, `tag_name`, `blog_count`) VALUES
-(1, 'PHP-Basic', 2),
-(2, 'PHP-OOP', 2),
-(3, 'PHP-PDO', 1),
-(4, 'Laravel', 0),
-(5, 'Lite-MVC', 0),
-(6, 'Best-Practices', 1),
-(7, 'Web-Server', 0),
-(8, 'DB-Server', 0),
-(9, 'Security', 0),
-(10, 'Scaling-Webapp', 0),
-(11, 'Web-Protocol', 0),
-(12, 'Bootstrap', 0),
-(13, 'HTML-CSS', 0),
-(14, 'JQuery', 0),
-(15, 'Operating-System', 0),
-(16, 'Productivitools', 0),
-(17, 'CPU-GPU', 0),
-(18, 'Storage and RAM', 0),
-(19, 'New-Product', 0);
-
--- --------------------------------------------------------
-
 --
 -- Table structure for table `users`
 --
@@ -274,40 +207,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_password_reset_timestamp` bigint(20) DEFAULT NULL COMMENT 'timestamp of the password reset request',
   `user_provider_type` text COLLATE utf8_unicode_ci,
   `user_facebook_uid` bigint(20) unsigned DEFAULT NULL COMMENT 'optional - facebook UID'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='user data' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='user data' AUTO_INCREMENT=1 ;
 
-ALTER TABLE `blog`
- ADD PRIMARY KEY (`blog_id`);
 
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
- ADD PRIMARY KEY (`cat_id`);
-
---
--- Indexes for table `category_post`
---
-ALTER TABLE `category_post`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `category_tag`
---
-ALTER TABLE `category_tag`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `comment`
---
-ALTER TABLE `comment`
- ADD PRIMARY KEY (`com_id`), ADD KEY `com_id` (`com_id`);
-
---
--- Indexes for table `notes`
---
-ALTER TABLE `notes`
- ADD PRIMARY KEY (`note_id`);
 
 --
 -- Indexes for table `page`
