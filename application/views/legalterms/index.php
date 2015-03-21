@@ -1,4 +1,3 @@
-/* This legalterms/index.php privacy policy */
 <body>
 <div id="wrapper">
 	<!-- start header -->
@@ -12,16 +11,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo URL; ?>home/index.php"><span>WebCode</span></a>
+                    <a class="navbar-brand" href="<?php echo URL; ?>home/"><span>WebCode</span></a>
                 </div>
 
                 <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo URL; ?>/home/index.php" target="_blank"><h4>Home</h4></a></li>
-                        <li><a href="<?php echo URL; ?>/blogs/index.php"><h4>Blogs</h4></a></li>
-                        <li><a href="<?php echo URL; ?>/snippets/index.php" target="_blank"><h4>Snippet</h4></a></li>
-                        <li><a href="<?php echo URL; ?>/tutors/index.php" target="_blank"><h4>Tutorial</h4></a></li>
-                        <li><a href="<?php echo URL; ?>/webtemplates/index.php" target="_blank"><h4>Template</h4></a></li>
+                        <li class="active"><a href="<?php echo URL; ?>home/" target="_blank"><h4>Home</h4></a></li>
+                        <li><a href="<?php echo URL; ?>blogs/"><h4>Blogs</h4></a></li>
+                        <li><a href="<?php echo URL; ?>snippets/" target="_blank"><h4>Snippet</h4></a></li>
+                        <li><a href="<?php echo URL; ?>tutorials/" target="_blank"><h4>Tutorial</h4></a></li>
+                        <li><a href="<?php echo URL; ?>webtemplates/" target="_blank"><h4>Template</h4></a></li>
                     </ul>
                 </div>
 
@@ -112,29 +111,28 @@
 				</div>
 				
 				<div class="widget">
-					<h5 class="widgetheading">Latest posts</h5>
+					<h5 class="widgetheading">Most Read</h5>
 					<ul class="recent">
-						<li>
-						<img src="<?php echo ASSET ; ?>img/dummies/blog/65x65/thumb1.jpg" class="pull-left" alt="" />
-						<h6><a href="#">Lorem ipsum dolor sit</a></h6>
-						<p>
-							 Mazim alienum appellantur eu cu ullum officiis pro pri
-						</p>
-						</li>
-						<li>
-						<a href="#"><img src="<?php echo ASSET ; ?>img/dummies/blog/65x65/thumb2.jpg" class="pull-left" alt="" /></a>
-						<h6><a href="#">Maiorum ponderum eum</a></h6>
-						<p>
-							 Mazim alienum appellantur eu cu ullum officiis pro pri
-						</p>
-						</li>
-						<li>
-						<a href="#"><img src="<?php echo ASSET ; ?>img/dummies/blog/65x65/thumb3.jpg" class="pull-left" alt="" /></a>
-						<h6><a href="#">Et mei iusto dolorum</a></h6>
-						<p>
-							 Mazim alienum appellantur eu cu ullum officiis pro pri
-						</p>
-						</li>
+					<?php 
+					$gbr=1;
+					foreach ($pops as $pop)	
+					{  	
+				        if (isset($pop->blog_img)) $img=$pop->blog_img;	
+				        if (isset($pop->cat_name)) $cname=$pop->cat_name;
+				        if (isset($pop->blog_id)) $id=$pop->blog_id; ?>			
+							<li>   
+							<img src="<?php echo ASSET ; ?>img/dummies/blog/65x65/thumb<?php echo $gbr ; ?>.jpg" class="pull-left" alt="" />
+							<?php
+							if (isset($pop->blog_title)) {
+								$slug=create_slug($pop->blog_title);
+							} ?>
+						
+						<h6><a href="<?php echo URL.'blogs/show/'.$id.'/'.$slug ; ?>">   
+						     <?php echo get_words($pop->blog_title, 4); ?></a>
+						</h6>
+						<p><?php if (isset($pop->blog_content)) echo get_words($pop->blog_content, 11), "</p>";	
+						$gbr++;
+					}?>
 					</ul>
 				</div>
 
@@ -147,7 +145,12 @@
 					  <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
 	            	</ul>
 				</div>
-
+				
+				<div class="widget">
+					<p>
+	            		<img src="<?php echo ASSET ; ?>img/blog/widget0.jpg" class="pull-left" alt="" />
+	            	</p>
+	            </div>
 				</aside>
 			</div>
 		</div>
