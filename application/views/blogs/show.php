@@ -1,4 +1,3 @@
-/* blogs/show.php */
 <body>
 <div id="wrapper">
 	<!-- start header -->
@@ -12,17 +11,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo URL; ?>home/index.php"><span>WebCode</span>/BLOG</a>
+                    <a class="navbar-brand" href="<?php echo URL; ?>"><span>WebCode</span>/BLOG</a>
                 </div>
 
                 <div class="navbar-collapse collapse ">
-                    <ul class="nav navbar-nav">
-                        <li><a href="<?php echo URL; ?>/home/index.php">Home</a></li>
-                        <li class="active"><a href="<?php echo URL; ?>/blogs/index.php">Blogs</a></li>
-                        <li><a href="<?php echo URL; ?>/snippets/index.php">Snippet</a></li>
-                        <li><a href="<?php echo URL; ?>/tutors/index.php">Tutorial</a></li>
-                        <li><a href="<?php echo URL; ?>/webtemplates/index.php">Template</a></li>
-                        
+                    <ul class="nav navbar-nav">                                    
+                        <li><a href="<?php echo URL; ?>" target="_blank"><h4>Home</h4></a></li>
+                        <li class="active"><a href="<?php echo URL; ?>blogs/"><h4>Blogs</h4></a></li>
+                        <li><a href="<?php echo URL; ?>snippets/" target="_blank"><h4>Snippet</h4></a></li>
+                        <li><a href="<?php echo URL; ?>tutors/" target="_blank"><h4>Tutorial</h4></a></li>
+                        <li><a href="<?php echo URL; ?>webtemplates/" target="_blank"><h4>Template</h4></a></li>
                     </ul>
                 </div>
 
@@ -46,7 +44,23 @@
 	<!-- Start Main Content -->
 	<section id="content">
 	<div class="container">
-		<div class="row">
+		<?php
+					srand( microtime() * 10000 );
+					  $num = rand( 1, 4 );					   
+					  switch( $num )  {
+					  	  case 1: $images = ASSET.'img/blog/headerblog1.jpg';
+						          break;
+						  case 2: $images = ASSET.'img/blog/headerblog11.jpg';
+						          break;
+						  case 3: $images = ASSET.'img/blog/headerblog2.jpg';
+						          break;
+						  case 4: $images = ASSET.'img/blog/headerblog10.jpg';
+						          break;
+					  }
+					  //echo "Random Image : <img src=$image_file />"; 
+
+					?>
+		<div class="row"><img src="<?php echo ($images);?>" alt="" />
 			<div class="col-lg-8">
 			<?php 
 			if (isset($blogs->blog_id)) $id=$blogs->blog_id; 
@@ -59,7 +73,12 @@
 			?> 
 			<article>  
 				<div class="page-title"> 
-					<h3 class="text-shadow"><?php if (isset($blogs->blog_title)) echo ($blogs->blog_title) ; ?></h3>
+					<h3 class="text-shadow">
+					<?php if (isset($blogs->blog_title)) {
+						echo ($blogs->blog_title) ; 
+						$slug =create_slug($blogs->blog_title);
+					}?>
+					</h3>
 					<img class="img-circle" src="<?php echo IMG;?>user/<?php echo ($blogs->blog_img);?>"  alt="pomosda" /><?php echo "  ",($blogs->user_name);?>
 					<br><br> 
 				</div>
@@ -67,7 +86,12 @@
 				<?php if (isset($blogs->blog_content)) echo ($blogs->blog_content) ; ?>
 				<div class="bottom-article">
 					<ul class="meta-post">
-						<li><span class="glyphicon glyphicon-time"></span><?php if (isset($blogs->blog_date)) echo " ",(tanggal_id($blogs->blog_date)); ?></li>
+						<li><span class="glyphicon glyphicon-time"></span>
+					    <?php if (isset($blogs->blog_date)) {
+						         $dates=date_create($blogs->blog_date);
+								 echo " ", (date_format($dates,'d M Y'));
+						      }  ?>	
+						</li>
 						<li><span class="glyphicon glyphicon-user"></span><?php if (isset($blogs->user_name)) echo " By ",($blogs->user_name); ?></li>
 						<li><span class="glyphicon glyphicon-th-list"></span><?php if (isset($blogs->cat_id)) echo " ", get_catname($blogs->cat_id); ?></li>
 						<li><span class="glyphicon glyphicon-eye-open"></span><?php if (isset($blogs->blog_read)) echo " ",($blogs->blog_read)," Read"; ?></li>
@@ -84,6 +108,11 @@
 				<div class="col-sm-12">
 					<p class="text-left"><h4>Add Comment</h4></p><hr>
 				</div>
+				<?php 
+				// if ((ctype_alnum($string1) == false) or (ctype_alnum($string2) == false)) {
+				//	die("Sorry, you must enter alphanumerik.");
+				?>
+
 				<form id="commentForm" action="<?php echo URL.'blogs/komentar/'; ?>" method="post">
 					<div class="col-sm-6">
 						<input class="form-control" type="text" placeholder="Name is required" name="com_name">
@@ -92,11 +121,11 @@
 						<input class="form-control" type="text" placeholder="Email is required" name="com_email">
 					</div>
 					<input type="hidden" name="com_slug" value="<?php echo ($slug); ?>">
-		            <input type="hidden" name="com_id" value="<?php echo ($id); ?>">
-		            <input type="hidden" name="comens" value="<?php echo ($comm_count); ?>">
+		            <input type="hidden" name="com_id" value="<?php echo ($blogs->blog_id); ?>">
+		            <input type="hidden" name="comm_count" value="<?php echo ($blogs->comment_count); ?>">
 					<div class="col-sm-12">
 						<br>
-						<textarea class="form-control" placeholder="Type your message here... is required" rows="5" name="com_content" ></textarea><br>
+						<textarea class="form-control" placeholder="Type your message here... is required" rows="5" name="<?php echo 'com_content'; ?>" ></textarea><br>
 						<button class="btn btn-primary" type="submit" name="submit_komentar"><i class="fa fa-reply"></i> Submit</button>
 						<!--<p class="pull-right"><a href="" class="btn btn-xs btn-success" role="button">Send Message</a></p>-->
 					</div>
@@ -123,70 +152,48 @@
 			<!-- Start side page -->
 			<div class="col-lg-4">
 				<aside class="right-sidebar">
-				<div class="widget">
+
+				<div class="widget"><br>
 					<h5 class="widgetheading">Categories</h5>
-					<ul class="cat">
+					<ul class="tags">
 						<?php 
 						foreach ($category as $cats)	
 						{  
 							if (isset($cats->cat_id)) $cid=$cats->cat_id;
-							if (isset($cats->cat_name)) $cname=$cats->cat_name;
-							if (isset($cats->cat_slug)) $cslug=$cats->cat_slug;
-							if (isset($cats->blog)) $blog=$cats->blog;
-							if (isset($cats->blog_count)) $jml=$cats->blog_count;
+							if (isset($cats->cat_name)) $cname=create_slug($cats->cat_name); 
 							?>
-							<li><i class="icon-angle-right"></i>
-							<a href="#"></a><span><?php echo ($cname)," (", ($jml),")" ; ?> </span></li><?php
-
+							<li><a href="<?php echo URL.'blogs/show_cat/'.$cid.'/'.$cname ; ?>"><span>
+							<?php  echo ($cname),' (', ($cats->blog_count),')' ; ?> </span></a></li><?php
 					    } ?>
 					</ul>
 				</div>
 
 				<div class="widget">
-					<h5 class="widgetheading">Latest posts</h5>
+					<h5 class="widgetheading">Most Read</h5>
 					<ul class="recent">
-						<li>
-						<img src="<?php echo ASSET ; ?>img/dummies/blog/65x65/thumb1.jpg" class="pull-left" alt="" />
-						<h6><a href="#">Lorem ipsum dolor sit</a></h6>
-						<p>
-							 Mazim alienum appellantur eu cu ullum officiis pro pri
-						</p>
-						</li>
-						<li>
-						<a href="#"><img src="<?php echo ASSET ; ?>img/dummies/blog/65x65/thumb2.jpg" class="pull-left" alt="" /></a>
-						<h6><a href="#">Maiorum ponderum eum</a></h6>
-						<p>
-							 Mazim alienum appellantur eu cu ullum officiis pro pri
-						</p>
-						</li>
-						<li>
-						<a href="#"><img src="<?php echo ASSET ; ?>img/dummies/blog/65x65/thumb3.jpg" class="pull-left" alt="" /></a>
-						<h6><a href="#">Et mei iusto dolorum</a></h6>
-						<p>
-							 Mazim alienum appellantur eu cu ullum officiis pro pri
-						</p>
-						</li>
+					<?php 
+					$gbr=1;
+					foreach ($pops as $pop)	
+					{  	
+				        if (isset($pop->blog_img)) $img=$pop->blog_img;	
+				        if (isset($pop->cat_name)) $cname=$pop->cat_name;
+				        if (isset($pop->blog_id)) $id=$pop->blog_id; ?>			
+							<li>   
+							<img src="<?php echo ASSET ; ?>img/dummies/blog/65x65/thumb<?php echo $gbr ; ?>.jpg" class="pull-left" alt="" />
+							<?php
+							if (isset($pop->blog_title)) {
+								$slug=create_slug($pop->blog_title);
+							} ?>
+						
+						<h6><a href="<?php echo URL.'blogs/show/'.$id.'/'.$slug ; ?>">   
+						     <?php echo get_words($pop->blog_title, 4); ?></a>
+						</h6>
+						<p><?php if (isset($pop->blog_content)) echo get_words($pop->blog_content, 11);	
+						$gbr++;
+					} ?></p>
 					</ul>
 				</div>
 				
-				<div class="widget">
-					<h5 class="widgetheading">Popular tags</h5>
-					<ul class="tags">
-						<?php 
-						foreach ($tags as $tg)	
-						{  
-							if (isset($tg->tag_id)) $tid=$tg->tag_id;
-							if (isset($tg->tag_name)) $tname=create_slug($tg->tag_name); 
-							if ($tg->blog_count>0)
-								{ ?>
-							       <li><a href="<?php echo URL.'/blogs/show_tag/'.$tid.'/'.$tname ; ?>">
-							       <span><?php echo ($tname)," (", ($tg->blog_count),")" ; ?>
-							 	   </span></a></li>
-						<?php 	}
-					    } 
-					    ?> 
-					</ul>
-				</div>
 				<div class="widget">
 					<h5 class="widgetheading">Social Network</h5>
 						<ul class="company-social">
@@ -204,9 +211,15 @@
 						foreach ($comments as $coms)	
 						{ ?>
 							<p><span class="glyphicon glyphicon-user"></span> <strong><?php if (isset($coms->com_name)) echo "  ",($coms->com_name), ",   "; ?></strong>
-							<span class="glyphicon glyphicon-time"></span><?php if (isset($coms->created_at)) echo "  ",(tanggal_id($coms->created_at)); ?></p>
+							<span class="glyphicon glyphicon-time"></span>
+							<?php 
+							if (isset($coms->created_at)) {
+							   $dt=date_create(($coms->created_at)); 
+							   echo " ", (date_format($dt,'d M Y'));
+							} ?></p>
 							<p><em><?php if (isset($coms->com_content)) echo ($coms->com_content); ?></em><p><hr>					
-						<?php 
+						<?php $dates=date_create($blogs->blog_date);
+								 
 					    } 
 					    ?> 
 			
