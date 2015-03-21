@@ -15,18 +15,18 @@ class Blogs extends Controller {
      */
     public function index() {
         // Open 3 model simultanously
-        $blogs_model = $this->loadModel('BlogsModel'); // class Controller, method loadModel(BlogsModel 
+        $blogs_model = $this->loadModel('BlogsModel'); // call Parent Controller Class method loadModel(BlogsModel 
         $blogs = $blogs_model->getAllblogs();          // open db method and call BlogsModel method getAllblogs()
         
         $category_model = $this->loadModel('CategorysModel');
         $category = $category_model->getCategory(); 
 
-        $tags_model = $this->loadModel('TagsModel'); 
-        $tags = $tags_model->getAlltag();
+        $pops_model = $this->loadModel('PopsModel'); 
+        $pops = $pops_model->getAllpop();
 
-        require 'application/views/_templates/blogheader.php';
+        require 'application/views/_templates/header2.php';
         require 'application/views/blogs/index.php';
-        require 'application/views/_templates/blogfooter.php';
+        require 'application/views/_templates/footer2.php'; 
     }
 
     /**
@@ -60,10 +60,26 @@ class Blogs extends Controller {
     }
 
 
-    public function show_Cat($cid, $cname)  {
+   public function show($id, $slug) {
+    
+        $blogs_model = $this->loadModel('BlogsModel');
+        $blogs = $blogs_model->show($id, $slug);
+              
+        $comments_model = $this->loadModel('CommentsModel');
+        $comments = $comments_model->getBlogcom($id, $slug);
 
-        if (isset($_GET["cid"])) $cid=$_GET["cid"]; 
-        if (isset($_GET["cname"]))  $cname=$_GET["cname"];
+        $category_model = $this->loadModel('CategorysModel'); 
+        $category = $category_model->getCategory(); 
+
+        $pops_model = $this->loadModel('PopsModel'); 
+        $pops = $pops_model->getAllpop();
+
+        require 'application/views/_templates/header3.php';
+        require 'application/views/blogs/show.php';
+        require 'application/views/_templates/footer3.php'; 
+    }
+
+   public function show_Cat($cid, $cname)  {
 
         $blogs_model = $this->loadModel('BlogsModel');
         $blogs = $blogs_model->getCatblogs($cid, $cname);
@@ -71,31 +87,12 @@ class Blogs extends Controller {
         $category_model = $this->loadModel('CategorysModel');
         $category = $category_model->getCategory();
 
-        $tags_model = $this->loadModel('TagsModel'); 
-        $tags = $tags_model->getAlltag(); 
-                
-        require 'application/views/_templates/blogheader.php';
+        $pops_model = $this->loadModel('PopsModel'); 
+        $pops = $pops_model->getAllpop();
+              
+        require 'application/views/_templates/header2.php';
         require 'application/views/blogs/index.php';
-        require 'application/views/_templates/blogfooter.php';
-    }
-
-    public function show_Tag($tid, $tname)  {
-
-        if (isset($_GET["tid"])) $cid=$_GET["tid"]; 
-        if (isset($_GET["tname"]))  $cname=$_GET["tname"];
-
-        $blogs_model = $this->loadModel('BlogsModel');
-        $blogs = $blogs_model->getTagblogs($tid, $tname);
-        
-        $category_model = $this->loadModel('CategorysModel');
-        $category = $category_model->getCategory();
-
-        $tags_model = $this->loadModel('TagsModel'); 
-        $tags = $tags_model->getAlltag();  
- 
-        require 'application/views/_templates/blogheader.php';
-        require 'application/views/blogs/index.php';
-        require 'application/views/_templates/blogfooter.php';
+        require 'application/views/_templates/footer2.php';
     }
 
     public function likes($id, $slug, $likes) { 
@@ -108,12 +105,11 @@ class Blogs extends Controller {
     }   
 
     public function komentar() {
-
         $slug=$_POST["com_slug"]; 
         $id=$_POST["com_id"];
         $comm_count=$_POST["comm_count"];
        
-        $pesan="comment-submitted"; 
+        $pesan="thanks-for-your-comments"; 
         
         if (!empty($_POST["com_name"]) AND !empty($_POST["com_email"]) AND !empty($_POST["com_content"])) {
             //$comments_model = $this->loadModel('CommentsModel');
@@ -130,7 +126,7 @@ class Blogs extends Controller {
             header('location: ' .URL. 'blogs/show/'.$id.'/'.$slug.'/'.$pesan);
         }
         else  {    
-            $pesan="error-nothing-submitted";
+            $pesan="error-invalid-form-input";
             header('location: ' .URL. 'blogs/show/'.$id.'/'.$slug.'/'.$pesan);
         }
     }
