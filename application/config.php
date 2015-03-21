@@ -17,9 +17,9 @@ ini_set("display_errors", 1); // show error
  * Put your URL here, for local development "127.0.0.1" or "localhost" (plus sub-folder) is fine
  *                    for production use "domain name", example "mydomainname.com"
  */
-define('URL', 'http://localhost/'); // root
-define('ASSET','http://localhost/public/assets/' );
-define('IMG','http://localhost/public/asset/img/' );
+define('URL', 'http://localhost/'); // if you create subfolder e.g http://localhost/webcode/
+define('ASSET', URL.'public/assets/' ); 
+define('IMG', ASSET.'img/' );
 /**
  * Configuration for: Database
  * This is the place where you define your database credentials, database type etc.
@@ -28,5 +28,5 @@ define('IMG','http://localhost/public/asset/img/' );
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'yourdbname');
-define('DB_USER', 'youruserDB');
-define('DB_PASS', 'yourpassword');
+define('DB_USER', 'yourusername');
+define('DB_PASS', 'yourpasswor');
