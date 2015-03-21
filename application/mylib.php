@@ -1,16 +1,4 @@
 <?php
-// This small function returns an encoded string to embed images, inline, inside your html/css code 
-// and reduce the number of calls to the server and speed up page load
-/*
-function encodeimg($file) {
-    $contents = file_get_contents($file);
-    $base64 = base64_encode($contents);
-    $imagetype = exif_imagetype($file);
-    $mime = image_type_to_mime_type($imagetype);
-    return "data:$mime;base64,$base64";
-} // usage,  
-echo "<img src='".encodeimg("minibots/avatar.jpg")."'/>"; */
-
 // send email with attachment
 function mail_file( $to, $subject, $messagehtml, $from, $fileatt, $replyto="" ) {
         // handles mime type for better receiving
@@ -51,7 +39,6 @@ function mail_file( $to, $subject, $messagehtml, $from, $fileatt, $replyto="" ) 
  
         // send mail
         return mail( $to, $subject, strip_tags($messagehtml), str_replace("\r\n","\n",$h) ) ;
- 
     }
     
 // SLUGGABLE
@@ -96,7 +83,6 @@ function count_words($string) {
     return $num;
 }
 
-
 function get_words($string, $max, $offset = 0, $append_dots = true){ 
     $string= str_replace("&#039;", "'", $string);
     $string= trim(preg_replace("/\s+/", " ", $string));
@@ -109,14 +95,12 @@ function get_words($string, $max, $offset = 0, $append_dots = true){
         }
 
 function cleanInput($input) {
-
   $search = array(
     '@<script[^>]*?>.*?</script>@si',   // Strip out javascript
     '@<[\/\!]*?[^<>]*?>@si',            // Strip out HTML tags
     '@<style[^>]*?>.*?</style>@siU',    // Strip style tags properly
     '@<![\s\S]*?--[ \t\n\r]*>@'         // Strip multi-line comments
-  );
-
+    );
     $output = preg_replace($search, '', $input);
     return $output;
   }
@@ -213,7 +197,6 @@ function loremipsum($para = 3) {
 } 
 // Basic Usage echo loremipsum(5);  will generate 5 Pargraph
 
-
 function get_catname($cat_id){  
 $cat=array('','PHP-Basic', 
               'PHP-OOP', 
@@ -224,12 +207,7 @@ $cat=array('','PHP-Basic',
               'Web-Server', 
               'Bootstrap', 
               'HTML-CSS', 
-              'JQuery', 
-              'Operating-System', 
-              'Productivitools', 
-              'Algorithm-Cpp',
-              'Hardware-Tech',
-              'New-Product');
+              'JQuery');
 
 switch ($cat_id) 
     {
@@ -263,90 +241,8 @@ switch ($cat_id)
        case 10:
            $cat_name= $cat[10];
            break;
-       case 11:
-           $cat_name= $cat[11];
-           break;
-       case 12:
-           $cat_name= $cat[12];
-           break;
-       case 13:
-           $cat_name= $cat[13];
-           break;
-       case 14:
-           $cat_name= $cat[14];
-           break;
-       case 15:
-           $cat_name= $cat[15];
-           break;
     }
     return $cat_name;
-}
-
-function get_tagname($tag_id) {  
-$tag = array('','PHP-Basic', 
-                'PHP-OOP', 
-                'PHP-Framework', 
-                'PHP-Security',     
-                'Best-Practices',
-                'Scaling-Webapp',
-                'Web-Server',
-                'Bootstrap',
-                'HTML-CSS',
-                'JQuery',
-                'Operating-System',
-                'Productivitools',
-                'CPU-GPU',
-                'Storage and RAM',
-                'New-Product');
-switch ($tag_id) 
-    {
-       case 1:
-            $tag_name= $tag[1];
-            break;
-       case 2:
-            $tag_name= $tag[2];
-            break;
-       case 3:
-            $tag_name= $tag[3];
-            break;
-       case 4:
-           $tag_name= $tag[4];
-           break;
-       case 5:
-           $tag_name= $tag[5];
-          break;
-       case 6:
-           $tag_name= $tag[6];
-          break;
-       case 7:
-           $tag_name= $tag[7];
-          break;       
-       case 8:
-           $tag_name= $tag[8];
-          break;
-       case 9:
-           $tag_name= $tag[9];
-          break;
-       case 10:
-           $tag_name= $tag[10];
-          break;
-       case 11:
-           $tag_name= $tag[11];
-          break;
-       case 12:
-           $tag_name= $tag[12];
-          break;
-       case 13:
-            $tag_name= $tag[13];
-            break;
-       case 14:
-           $tag_name= $tag[14];
-           break;
-       case 15:
-           $tag_name= $tag[15];
-          break;
-    }
-    return $tag_name;
 }
 
 function pagination($item_count, $limit, $cur_page, $link)
