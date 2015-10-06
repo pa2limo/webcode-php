@@ -19,8 +19,8 @@ if (file_exists('vendor/autoload.php')) {
 require 'application/config.php';
 
 // load application class
-require 'application/appurl.php';
-require 'application/controller.php';
+require 'application/appurl.php';     // routing
+require 'application/controller.php'; // database modeling
 require 'application/mylib.php';
 // start the application
 $app = new Appurl(); // start app engines (igniter)
