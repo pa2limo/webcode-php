@@ -121,8 +121,8 @@
 						<input class="form-control" type="text" placeholder="Email is required" name="com_email">
 					</div>
 					<input type="hidden" name="com_slug" value="<?php echo ($slug); ?>">
-		            <input type="hidden" name="com_id" value="<?php echo ($blogs->blog_id); ?>">
-		            <input type="hidden" name="comm_count" value="<?php echo ($blogs->comment_count); ?>">
+		            		<input type="hidden" name="com_id" value="<?php echo ($blogs->blog_id); ?>">
+		            		<input type="hidden" name="comm_count" value="<?php echo ($blogs->comment_count); ?>">
 					<div class="col-sm-12">
 						<br>
 						<textarea class="form-control" placeholder="Type your message here... is required" rows="5" name="<?php echo 'com_content'; ?>" ></textarea><br>
@@ -131,19 +131,8 @@
 					</div>
 					
 				
-			</div>
-			</article>	    
-			    <!--    <div class="col-lg-4">
-				        <input type="text" class="form-control" placeholder="Name" name="com_name" />
-				    </div>
-
-				    <div class="col-lg-4">
-				        <input type="text" class="form-control" placeholder="Email" name="com_email" />
-				    </div>
-				    <div class="form-group">
-				        <textarea class="form-control" placeholder="Write comment here..." name="com_content" rows="5"></textarea>
-				    </div>-->	
-				    
+					</div>
+				</article>	    
 				</form>
 			
 					 
