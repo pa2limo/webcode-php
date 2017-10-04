@@ -4,7 +4,7 @@ class Appurl {
     private $url_controller = null;
     private $url_action = null;
     private $url_params = array();
-    /** "Boots Up" the application:  */
+    /** "Boots Up" the application deploy:  */
     public function __construct() {
         
         $this->splitUrl(); // create array with URL parts in $url       
